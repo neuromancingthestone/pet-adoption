@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <title>{{pet.name}}</title>
+</head>
+
+<body>
+  <h1>{{pet.name}}</h1>
+  <img src="{{pet.photo_url}}" alt="Add a Pet Photo" width="200" height="200" alt=""><br>
+  <ul>
+    <li>ID: {{pet.id}}</li>
+    <li>Name: {{pet.name}}</li>
+    <li>Species: {{pet.species}}</li>
+    <li>Age: {{pet.age}}</li>
+  </ul>
+  <form id="pet-edit-form" method="POST">
+    {{ form.hidden_tag() }}
+
+    {% for field in form 
+      if field.widget.input_type != 'hidden' %}
+      <p>
+        {{field.label}}
+        {{field}}
+
+        {% for err in field.errors %}
+        {{err}}
+        {% endfor %}
+      </p>
+      {% endfor %}
+      <button class="btn btn-success">Edit Pet</button>
+      <a href="/{{pet.id}}/delete.html" class="btn btn-danger">Delete Pet</a>
+    </form>  
+  <br>
+  <a href="/" class="btn btn-info">Go Back</a>
+</body>
+
+</html>
